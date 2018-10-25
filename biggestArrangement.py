@@ -24,24 +24,24 @@ def max_permutation_optimized(perm, pointsList=None):
     {0, 2, 5}
     '''
     if pointsList == None: pointsList = set(range(len(perm)))
-    if len(pointsList) == 1: return pointsList
-    
-    referenceCounter = Counter(perm)
-    notMappedPointsList = [i for i in pointsList if referenceCounter[i] == 0]
-    
+
+    addressCounter = Counter(perm)
+
+    notMappedPointsList = [i for i in pointsList if addressCounter[i] == 0]
+
+
     while notMappedPointsList:
-        
-        element = notMappedPointsList.pop()
-        pointsList.remove(element)
-        index = perm[element]
-        referenceCounter[index] -= 1
 
-        if referenceCounter[index] == 0:
-            notMappedPointsList.append(index)
-    
+        removed = notMappedPointsList.pop()
+        pointsList.remove(removed)
+
+        address = perm[removed]
+        addressCounter[address] -= 1
+
+        if addressCounter[address] == 0:
+             notMappedPointsList.append(address)
+
     return pointsList
-
-
 
 
 
